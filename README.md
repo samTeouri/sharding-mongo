@@ -106,4 +106,3 @@ Les principaux endpoints sont :
 Pour chaque endpoint, envoyez/recevez les données au format JSON. Le paramètre `pays` permet de router la requête vers la bonne base régionale.
 
 ---
-N’hésitez pas à consulter le code source pour plus de détails sur la logique métier et les schémas de données.
