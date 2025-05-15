@@ -1,5 +1,10 @@
 # Projet MongoDB – Split Databases
 
+## Collaborateurs
+- Jérémy MONGUIN
+- Soufiane SAIDI
+- Samrou TEOURI
+
 ## Choix d’implémentation
 
 Notre projet utilise plusieurs instances MongoDB, chacune dédiée à une région géographique (Europe, Asie, Globale). Cette organisation permet :
