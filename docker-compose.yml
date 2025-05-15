@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # Base de données Europe (primaire)
+  db-europe:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    volumes:
+      - europe-data:/data/db
+    command: mongod --replSet rs-europe
+    networks:
+      - mongo-network
+
+  # Réplique Europe
+  db-europe-replica:
+    image: mongo:latest
+    ports:
+      - "27019:27017"
+    volumes:
+      - europe-replica-data:/data/db
+    command: mongod --replSet rs-europe
+    depends_on:
+      - db-europe
+    networks:
+      - mongo-network
+
+  # Base de données Asie (primaire)
+  db-asia:
+    image: mongo:latest
+    ports:
+      - "27020:27017"
+    volumes:
+      - asia-data:/data/db
+    command: mongod --replSet rs-asia
+    networks:
+      - mongo-network
+
+  # Réplique Asie
+  db-asia-replica:
+    image: mongo:latest
+    ports:
+      - "27021:27017"
+    volumes:
+      - asia-replica-data:/data/db
+    command: mongod --replSet rs-asia
+    depends_on:
+      - db-asia
+    networks:
+      - mongo-network
+
+  # Base de données Globale (primaire)
+  db-global:
+    image: mongo:latest
+    ports:
+      - "27022:27017"
+    volumes:
+      - global-data:/data/db
+    command: mongod --replSet rs-global
+    networks:
+      - mongo-network
+
+  # Réplique Globale
+  db-global-replica:
+    image: mongo:latest
+    ports:
+      - "27023:27017"
+    volumes:
+      - global-replica-data:/data/db
+    command: mongod --replSet rs-global
+    depends_on:
+      - db-global
+    networks:
+      - mongo-network
+
+volumes:
+  europe-data:
+  europe-replica-data:
+  asia-data:
+  asia-replica-data:
+  global-data:
+  global-replica-data:
+
+networks:
+  mongo-network:
+    driver: bridge
